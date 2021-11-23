@@ -1,0 +1,29 @@
+{
+	"id" : "nc_talk",
+	"name" : "Nextcloud Talk",
+	"description" : {
+		"fr_FR": "Plugin permettant de communiquer avec Jeedom via Nextcloud Talk."
+	},
+	"licence" : "AGPL",
+	"author" : "NeC.magic",
+	"require" : "3.3.39",
+	"category" : "communication",
+	"hasDependency" : true,
+	"hasOwnDeamon" : true,
+	"maxDependancyInstallTime" : 5,
+	"changelog" : "https://necen.github.io/jeedom_docs/plugins/nc_talk/changelog.html",
+	"documentation" : "https://necen.github.io/jeedom_docs/plugins/nc_talk",
+	"link" : {
+		"forum":"Lien vers le forum",
+		"video" : "Lien vers une video"
+	},
+	"language": [
+		"fr_FR"
+	],
+	"compatibility": [
+		"rpi",
+		"docker",
+		"diy",
+		"v4",
+	]
+}
