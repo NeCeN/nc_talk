@@ -11,8 +11,8 @@
 	"hasDependency" : true,
 	"hasOwnDeamon" : true,
 	"maxDependancyInstallTime" : 5,
-	"changelog" : "https://necen.github.io/jeedom_docs/plugins/nc_talk/changelog.html",
-	"documentation" : "https://necen.github.io/jeedom_docs/plugins/nc_talk",
+	"changelog" : "https://necen.github.io/nc_talk/#language#/changelog.html",
+	"documentation" : "https://necen.github.io/nc_talk/#language#/",
 	"link" : {
 		"forum":"Lien vers le forum",
 		"video" : "Lien vers une video"
