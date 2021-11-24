@@ -1,11 +1,41 @@
-# Template de plugin pour Jeedom
+# Plugin Nextcloud Talk
 
-Ce "template de plugin" sert de base à la réalisation de plugins pour **Jeedom**.
+## Présentation
 
-La documentation générale relative à la conception de plugin est consultable [ici](https://doc.jeedom.com/fr_FR/dev/). Dans le détail :   
-* [Utilisation du template de plugin](https://doc.jeedom.com/fr_FR/dev/plugin_template) : Le template de plugin est une base de plugin pour Jeedom qui doit être adaptée avec l'id de votre plugin et à laquelle il suffit d'ajouter vos propres fonctions. 
-* [Fichier info.json](https://doc.jeedom.com/fr_FR/dev/structure_info_json) : Intégré depuis la version 3.0 de Jeedom, le fichier **info.json** est obligatoire pour le bon fonctionnement des plugins et leur bon déploiement sur le Market Jeedom.
-* [Icône du plugin](https://doc.jeedom.com/fr_FR/dev/Icone_de_plugin) : Afin de pouvoir être publié sur le Market Jeedom, tout plugin doit disposer d’une icône. Attention à ne pas utiliser le même code couleur que les icônes des plugins Jeedom officiels.
-* [Widget du plugin](https://doc.jeedom.com/fr_FR/dev/widget_plugin) : Présentation des différentes manières d'inclure des widgets personnalisés au plugin.
-* [Documentation du plugin](https://doc.jeedom.com/fr_FR/dev/documentation_plugin) : Présentation de la mise en place d'une documentation car un bon plugin n'est rien sans documentation adéquate.
-* [Publication du plugin](https://doc.jeedom.com/fr_FR/dev/publication_plugin) : Description des pré-requis indispensables à la publication du plugin.
+Nextcloud Talk est un système de messagerie utilisé sur la plateforme de partage Nextcloud.
+
+Le plugin permet de créer des équipements pouvant communiquer sur les Talks de Nextcloud
+
+## Configuration
+
+### Configuration du plugin
+
+Sur la page du plugin on peut :
+
+  * Définir l'url de nextcloud
+
+  * Définir le nom et le mot de passe de l'utilisateur qui postera sur les Talks (cet utilisateur doit être au préalable existant sur Nextcloud) et avoir accès aux Talks
+
+  * Définir la fréquence de rafraichissement des Talks
+
+  * Configurer le port du démon
+
+## Equipements
+
+### Configuration des équipements
+
+Les équipements ont le paramètre suivant :
+
+  * ID du Talk, cela correspond au code en fin d'url du talk.
+
+### Commandes des équipements
+Les équipements ont les commandes suivantes :
+
+  * Lire : pour lire le dernier message du talk
+  * Envoyer : pour envoyer un message sur le talk
+
+## FAQ
+
+## Changelog
+
+[Voir la page dédiée](changelog.md).
