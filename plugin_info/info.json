@@ -5,7 +5,7 @@
 		"fr_FR": "Plugin permettant de communiquer avec Jeedom via Nextcloud Talk."
 	},
 	"licence" : "AGPL",
-	"author" : "NeC.magic",
+	"author" : "NeCeN",
 	"require" : "3.3.39",
 	"category" : "communication",
 	"hasDependency" : true,
@@ -20,6 +20,6 @@
 		"rpi",
 		"docker",
 		"diy",
-		"v4",
+		"v4"
 	]
 }
