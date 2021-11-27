@@ -27,6 +27,8 @@ Sur la page du plugin on peut :
 Les équipements ont le paramètre suivant :
 
   * ID du Talk, cela correspond au code en fin d'url du talk.
+  * Options :
+    - Interactions Jeedom, permet d'envoyer les messages au moteur d'interaction Jeedom et d'avoir le retour dans le Talk
 
 ### Commandes des équipements
 Les équipements ont les commandes suivantes :

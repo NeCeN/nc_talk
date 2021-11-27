@@ -133,6 +133,14 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 
+                                                        <div class="form-group">
+                                                                <label class="col-sm-3 control-label">{{Options}}</label>
+                                                                <div class="col-sm-7">
+                                                                        <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="isInteract"/>{{Interactions Jeedom}}</label>
+                                                                </div>
+                                                        </div>
+
+
 						<!-- Partie droite de l'onglet "Équipement" -->
 						<!-- Affiche l'icône du plugin par défaut mais vous pouvez y afficher les informations de votre choix -->
 						<div class="col-lg-6">
