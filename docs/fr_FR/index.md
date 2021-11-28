@@ -4,7 +4,9 @@
 
 Nextcloud Talk est un système de messagerie utilisé sur la plateforme de partage Nextcloud.
 
-Le plugin permet de créer des équipements pouvant communiquer sur les Talks de Nextcloud
+Le plugin permet de créer des équipements pouvant communiquer (Lire, Ecrire) sur les Talks de Nextcloud.
+
+Les Talks peuvent réaliser des Interactions et est compatible avec Ask.
 
 ## Configuration
 

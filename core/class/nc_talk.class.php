@@ -310,7 +310,11 @@ class nc_talkCmd extends cmd {
         switch ($this->getLogicalId()) { //vérifie le logicalid de la commande
           case 'sender': // LogicalId de la commande Envoyer que l’on a créé dans la méthode Postsave de la classe.
             $info = $_options['title'] . " - " . $_options['message']; //On prépare le message
-            $request="curl -k -u '".config::byKey('nc_user','nc_talk', 'nc').":".config::byKey('nc_psw','nc_talk', 'nc')."' -d 'message=".$_options['title']." - ".$_options['message']."' -H 'OCS-APIRequest: true' -X POST '".config::byKey('nc_url','nc_talk', 'nc')."/ocs/v2.php/apps/spreed/api/v1/chat/".$eqlogic->getConfiguration('nc_talk_id', 'nc')."'"; //On prépare la requête curl
+            if (isset($_options['answer']))
+            {
+               $info = $_options['message'] . " [" . implode(",", $_options['answer'])."]";
+            }
+            $request="curl -k -u '".config::byKey('nc_user','nc_talk', 'nc').":".config::byKey('nc_psw','nc_talk', 'nc')."' -d 'message=".$info."' -H 'OCS-APIRequest: true' -X POST '".config::byKey('nc_url','nc_talk', 'nc')."/ocs/v2.php/apps/spreed/api/v1/chat/".$eqlogic->getConfiguration('nc_talk_id', 'nc')."'"; //On prépare la requête curl
             exec($request);
             break;
         }
