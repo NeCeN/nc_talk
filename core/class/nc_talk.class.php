@@ -114,7 +114,30 @@ class nc_talk extends eqLogic {
         $info->setType('info');
         $info->setSubType('string');
         $info->save();
-        
+
+        $auteur = $this->getCmd(null, 'author');
+        if (!is_object($auteur)) {
+          $auteur = new nc_talkCmd();
+          $auteur->setName(__('Auteur', __FILE__));
+        }
+        $auteur->setLogicalId('author');
+        $auteur->setEqLogic_id($this->getId());
+        $auteur->setType('info');
+        $auteur->setSubType('string');
+        $auteur->save();
+
+        $msg_timestamp = $this->getCmd(null, 'timestamp');
+        if (!is_object($msg_timestamp)) {
+          $msg_timestamp = new nc_talkCmd();
+          $msg_timestamp->setName(__('Timestamp', __FILE__));
+        }
+        $msg_timestamp->setLogicalId('timestamp');
+        $msg_timestamp->setEqLogic_id($this->getId());
+        $msg_timestamp->setType('info');
+        $msg_timestamp->setSubType('string');
+        $msg_timestamp->save();
+
+
         $send = $this->getCmd(null, 'sender');
         if (!is_object($send)) {
           $send = new nc_talkCmd();

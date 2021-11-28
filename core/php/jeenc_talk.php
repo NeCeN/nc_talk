@@ -18,7 +18,9 @@ try {
     if (isset($result['eq_id'])) {
 	$eq=eqLogic::byId($result['eq_id']);
 	$eq->checkAndUpdateCmd('read',$result['info']);
-	log::add('nc_talk', 'debug',$result['eq_id']." < ".$result['info']); //remplacez template par l'id de votre plugin
+	$eq->checkAndUpdateCmd('author',$result['author']);
+	$eq->checkAndUpdateCmd('timestamp',$result['timestamp']);
+	log::add('nc_talk', 'debug',$result['eq_id']." < ".$result['timestamp']." - ".$result['author']." : ".$result['info']); //remplacez template par l'id de votre plugin
 
 	foreach ($eq->getCmd('action') as $cmd) {
 		if ($cmd->askResponse($result['info']))

@@ -76,13 +76,13 @@ def listen():
 				response = requests.get(_url+'/ocs/v2.php/apps/spreed/api/v1/chat/'+talk[eq], headers=headers, data=data,auth = HTTPBasicAuth(_user, _pswd))
 				if response.ok:
 					msg = ET.fromstring(response.content).find('data').find('element')
-					#logging.debug(response.content)
+					logging.debug(response.content)
 					temps=msg.find('timestamp').text
 					if temps != tps[eq]:
 						tps[eq]=temps
 						logging.debug(temps)
 						if (msg.find('actorId').text != _user):
-							JEEDOM_COM.send_change_immediate({'eq_id' : eq,'info' : msg.find('message').text})
+							JEEDOM_COM.send_change_immediate({'eq_id' : eq,'info' : msg.find('message').text,'author' : msg.find('actorId').text,'timestamp':temps})
 							logging.debug(msg.find('message').text)
 				else:
 					logging.debug('Talk ID inconnu')
