@@ -2,7 +2,7 @@
 	"id" : "nc_talk",
 	"name" : "Nextcloud Talk",
 	"description" : {
-		"fr_FR": "Plugin permettant de communiquer avec Jeedom via Nextcloud Talk."
+		"fr_FR": "Plugin permettant de communiquer et d'interagir avec Jeedom via Nextcloud Talk."
 	},
 	"licence" : "AGPL",
 	"author" : "NeCeN",
@@ -16,10 +16,16 @@
 	"language": [
 		"fr_FR"
 	],
+	"link" : {
+							"forum":"https://community.jeedom.com/t/presentation-plugin-nc-talk-nextcloud-talk/72458"
+			},
 	"compatibility": [
+		"miniplus",
+		"smart",
 		"rpi",
 		"docker",
 		"diy",
+		"mobile",
 		"v4"
 	]
 }

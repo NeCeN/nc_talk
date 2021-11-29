@@ -337,7 +337,9 @@ class nc_talkCmd extends cmd {
             {
                $info = $_options['message'] . " [" . implode(",", $_options['answer'])."]";
             }
-            $request="curl -k -u '".config::byKey('nc_user','nc_talk', 'nc').":".config::byKey('nc_psw','nc_talk', 'nc')."' -d 'message=".$info."' -H 'OCS-APIRequest: true' -X POST '".config::byKey('nc_url','nc_talk', 'nc')."/ocs/v2.php/apps/spreed/api/v1/chat/".$eqlogic->getConfiguration('nc_talk_id', 'nc')."'"; //On prépare la requête curl
+            $info=str_replace('"','\"',$info);
+            $request="curl -k -u \"".config::byKey('nc_user','nc_talk', 'nc').":".config::byKey('nc_psw','nc_talk', 'nc')."\" -d \"message=".$info."\" -H 'OCS-APIRequest: true' -X POST '".config::byKey('nc_url','nc_talk', 'nc')."/ocs/v2.php/apps/spreed/api/v1/chat/".$eqlogic->getConfiguration('nc_talk_id', 'nc')."'"; //On prépare la requête curl
+            log::add('nc_talk', 'debug', $request);
             exec($request);
             break;
         }

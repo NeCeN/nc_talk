@@ -8,23 +8,21 @@ Le plugin permet de créer des équipements pouvant communiquer (Lire, Ecrire) s
 
 Les Talks peuvent réaliser des Interactions et est compatible avec Ask.
 
-## Configuration
-
-### Configuration du plugin
+## Configuration du plugin
 
 Sur la page du plugin on peut :
 
   * Définir l'url de nextcloud
 
-  * Définir le nom et le mot de passe de l'utilisateur qui postera sur les Talks (cet utilisateur doit être au préalable existant sur Nextcloud) et avoir accès aux Talks
+  * Définir le nom et le mot de passe de l'utilisateur qui postera sur les Talks (cet utilisateur doit être au préalable existant sur Nextcloud) et avoir accès aux Talks.
 
   * Définir la fréquence de rafraichissement des Talks
 
   * Configurer le port du démon
 
-## Equipements
+_Le mot de passe ne doit pas contenir de : ou de ". D'une manière générale préféré un mot de passe d'application._
 
-### Configuration des équipements
+## Configuration des équipements
 
 Les équipements ont le paramètre suivant :
 
@@ -35,8 +33,13 @@ Les équipements ont le paramètre suivant :
 ### Commandes des équipements
 Les équipements ont les commandes suivantes :
 
-  * Lire : pour lire le dernier message du talk
-  * Envoyer : pour envoyer un message sur le talk
+* Informations :
+  - Auteur : contient le nom de l'auteur du dernier message
+  - Timestap : contient le timestamp du dernier message
+  - Lire : pour lire le dernier message du talk
+
+* Commandes :
+    - Envoyer : pour envoyer un message sur le talk
 
 ## FAQ
 
