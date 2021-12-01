@@ -2,7 +2,10 @@
 
 Important : en cas de mise à jour disponible pour laquelle il n'y a pas d'information dans cette section, c'est qu'elle n'intègre aucune nouveauté majeure. Cela peut être un ajout de documentation, une correction de documentation, des traductions ou bien de la correction de bugs mineurs.
 
-- v1.2.2
+v1.3.0
+Ajout de l'envoi de Pièce Jointe (plugin camera)
+
+v1.2.2
 Correction d'un bug lors d'envoi de message contenant une apostrophe.
 
 v1.2.1

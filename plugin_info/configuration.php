@@ -41,6 +41,14 @@ if (!isConnect()) {
       </div>
     </div>
     <div class="form-group">
+      <label class="col-md-4 control-label">{{Nextcloud Upload Folder}}
+        <sup><i class="fas fa-question-circle tooltips" title="{{Dossier d'upload des fichiers côté Nextcloud}}"></i></sup>
+      </label>
+      <div class="col-md-4">
+        <input class="configKey form-control" data-l1key="nc_files" placeholder="Talk"/>
+      </div>
+    </div>
+    <div class="form-group">
       <label class="col-md-4 control-label">{{Nextcloud User Password}}
         <sup><i class="fas fa-question-circle tooltips" title="{{Renseignez le mot de passe utilisateur}}"></i></sup>
       </label>
@@ -48,6 +56,7 @@ if (!isConnect()) {
         <input class="configKey form-control" data-l1key="nc_psw"/>
       </div>
     </div>
+
     <div class="form-group">
       <label class="col-md-4 control-label">{{Base de Temps}}
         <sup><i class="fas fa-question-circle tooltips" title="{{Temps entre 2 lectures en secondes}}"></i></sup>

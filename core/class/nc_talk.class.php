@@ -19,7 +19,7 @@
 /* * ***************************Includes********************************* */
 require_once __DIR__  . '/../../../../core/php/core.inc.php';
 
-  
+
 class nc_talk extends eqLogic {
     /*     * *************************Attributs****************************** */
 
@@ -99,7 +99,7 @@ class nc_talk extends eqLogic {
 
  // Fonction exÃ©cutÃ©e automatiquement avant la sauvegarde (crÃ©ation ou mise Ã  jour) de l'Ã©quipement
     public function preSave() {
-       
+
     }
 
  // Fonction exÃ©cutÃ©e automatiquement aprÃ¨s la sauvegarde (crÃ©ation ou mise Ã  jour) de l'Ã©quipement
@@ -329,16 +329,31 @@ class nc_talkCmd extends cmd {
 
   // ExÃ©cution d'une commande
      public function execute($_options = array()) {
-        $eqlogic = $this->getEqLogic(); //récupère l'éqlogic de la commande $this
-        switch ($this->getLogicalId()) { //vérifie le logicalid de la commande
-          case 'sender': // LogicalId de la commande Envoyer que l’on a créé dans la méthode Postsave de la classe.
-            $info = $_options['title'] . " - " . $_options['message']; //On prépare le message
+        $eqlogic = $this->getEqLogic(); //rï¿½cupï¿½re l'ï¿½qlogic de la commande $this
+        switch ($this->getLogicalId()) { //vï¿½rifie le logicalid de la commande
+          case 'sender': // LogicalId de la commande Envoyer que lï¿½on a crï¿½ï¿½ dans la mï¿½thode Postsave de la classe.
+            $info = $_options['title'] . " - " . $_options['message']; //On prï¿½pare le message
             if (isset($_options['answer']))
             {
                $info = $_options['message'] . " [" . implode(",", $_options['answer'])."]";
             }
+            if (isset($_options['files']))
+            {
+		            foreach ($_options['files'] as $file)
+                {
+                   $request="curl -k -u \"".config::byKey('nc_user','nc_talk', 'nc').":".config::byKey('nc_psw','nc_talk', 'nc')."\" -T '".$file."' ".config::byKey('nc_url','nc_talk', 'nc')."/remote.php/dav/files/".config::byKey('nc_user','nc_talk', 'nc')."/".config::byKey('nc_files','nc_talk', 'Talk')."/";
+                   log::add('nc_talk','debug',$request);
+                   exec($request);
+                   $file=end(explode("/",$file));
+                   $request="curl -k -u \"".config::byKey('nc_user','nc_talk', 'nc').":".config::byKey('nc_psw','nc_talk', 'nc')."\" -d 'shareType=10' -d 'shareWith=".$eqlogic->getConfiguration('nc_talk_id', 'nc')."' -d 'path=".config::byKey('nc_files','nc_talk', 'Talk')."/".$file."' -H 'OCS-APIRequest: true' -X POST '".config::byKey('nc_url','nc_talk', 'nc')."/ocs/v2.php/apps/files_sharing/api/v1/shares'";
+                   log::add('nc_talk','debug',$request);
+                   exec($request);
+
+                }
+                $info = $_options['message']; //On prï¿½pare le message
+            }
             $info=str_replace('"','\"',$info);
-            $request="curl -k -u \"".config::byKey('nc_user','nc_talk', 'nc').":".config::byKey('nc_psw','nc_talk', 'nc')."\" -d \"message=".$info."\" -H 'OCS-APIRequest: true' -X POST '".config::byKey('nc_url','nc_talk', 'nc')."/ocs/v2.php/apps/spreed/api/v1/chat/".$eqlogic->getConfiguration('nc_talk_id', 'nc')."'"; //On prépare la requête curl
+            $request="curl -k -u \"".config::byKey('nc_user','nc_talk', 'nc').":".config::byKey('nc_psw','nc_talk', 'nc')."\" -d \"message=".$info."\" -H 'OCS-APIRequest: true' -X POST '".config::byKey('nc_url','nc_talk', 'nc')."/ocs/v2.php/apps/spreed/api/v1/chat/".$eqlogic->getConfiguration('nc_talk_id', 'nc')."'"; //On prï¿½pare la requï¿½te curl
             log::add('nc_talk', 'debug', $request);
             exec($request);
             break;

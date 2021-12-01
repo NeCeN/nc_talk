@@ -16,11 +16,13 @@ Sur la page du plugin on peut :
 
   * Définir le nom et le mot de passe de l'utilisateur qui postera sur les Talks (cet utilisateur doit être au préalable existant sur Nextcloud) et avoir accès aux Talks.
 
+  * Définir le dossier de l'utilisateur sur Nextcloud où seront uploadées les pièces jointes (par défaut dossier Talk)
+
   * Définir la fréquence de rafraichissement des Talks
 
   * Configurer le port du démon
 
-_Le mot de passe ne doit pas contenir de : ou de ". D'une manière générale préféré un mot de passe d'application._
+_Le mot de passe ne doit pas contenir de : ou de ". D'une manière générale préférez un mot de passe d'application._
 
 ## Configuration des équipements
 
