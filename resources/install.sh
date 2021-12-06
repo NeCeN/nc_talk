@@ -26,7 +26,7 @@ echo "Install the required python libraries"
 echo "*************************************"
 python3 -m pip install "aiohttp"
 echo 80 > ${PROGRESS_FILE}
-
+python3 -m pip install "pyudev"
 echo 100 > ${PROGRESS_FILE}
 echo $(date)
 echo "***************************"
