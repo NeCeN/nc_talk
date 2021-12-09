@@ -49,6 +49,8 @@ Les équipements ont les commandes suivantes :
 * Commandes :
     - Envoyer : pour envoyer un message sur le talk
 
+_Le message peut contenir le code @'user name' pour notifier un utilisateur à nom composé._
+
 ## FAQ
 
 ## Changelog

@@ -352,6 +352,26 @@ class nc_talkCmd extends cmd {
                 }
                 $info = $_options['message']; //On pr�pare le message
             }
+
+            if (strpos($info,"@'")>0) //Parse user @'john doe'
+            {
+                 $info_tab=explode("@'",$info);
+                 $info="";
+                 $n=0;
+                 $sym="@\"";
+                 foreach($info_tab as $element)
+                 {
+
+                     $n++;
+                     if ($n>1)
+                     {
+                        $element=preg_replace('/'.preg_quote("'", '/').'/', "\"", $element, 1);
+                     }
+                     if ($n==count($info_tab))$sym="";
+                     $info.=$element.$sym;
+                 log::add('nc_talk', 'debug', $info);
+                 }
+            }
             $info=str_replace('"','\"',$info);
             $request="curl -k -u \"".config::byKey('nc_user','nc_talk', 'nc').":".config::byKey('nc_psw','nc_talk', 'nc')."\" -d \"message=".$info."\" -H 'OCS-APIRequest: true' -X POST '".config::byKey('nc_url','nc_talk', 'nc')."/ocs/v2.php/apps/spreed/api/v1/chat/".$eqlogic->getConfiguration('nc_talk_id', 'nc')."'"; //On pr�pare la requ�te curl
             log::add('nc_talk', 'debug', $request);
