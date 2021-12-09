@@ -149,7 +149,7 @@ if args.pswd:
 if args.url:
 	_url = args.url
 if args.tps:
-	_tps = args.tps
+	_tps = int(args.tps)
 if args.port:
 	_socket_port = args.port
 if args.device:
