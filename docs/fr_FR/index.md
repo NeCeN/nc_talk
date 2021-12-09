@@ -10,7 +10,13 @@ Les Talks peuvent réaliser des Interactions et est compatible avec Ask.
 
 ## Configuration du plugin
 
-Sur la page du plugin on peut :
+Dans Nextcloud :
+
+  * Créer un utilisateur ou utiliser un autre utilisateur que vous même.
+
+  * Définir de préférence un mot de passe d'application (pour éviter les symbols " et :)
+
+Dans Jeedom sur la page du plugin on peut :
 
   * Définir l'url de nextcloud
 
