@@ -86,7 +86,7 @@ def listen():
 							logging.debug(temps)
 							if (author != _user):
 								JEEDOM_COM.send_change_immediate({'eq_id' : eq,'info' : msg,'author' : author,'timestamp':temps})
-								logging.debug(msg.find('message').text)
+								logging.debug(msg)
 				else:
 					logging.debug('Talk ID inconnu')
 	except KeyboardInterrupt:
