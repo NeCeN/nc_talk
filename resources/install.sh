@@ -27,6 +27,8 @@ echo "*************************************"
 python3 -m pip install "aiohttp"
 echo 80 > ${PROGRESS_FILE}
 python3 -m pip install "pyudev"
+echo 90 > ${PROGRESS_FILE}
+python3 -m pip install "urllib3"
 echo 100 > ${PROGRESS_FILE}
 echo $(date)
 echo "***************************"
