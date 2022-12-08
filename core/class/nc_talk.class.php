@@ -353,7 +353,7 @@ class nc_talkCmd extends cmd {
                 $info = $_options['message']; //On pr�pare le message
             }
 
-            if (strpos($info,"@'")>0) //Parse user @'john doe'
+            if (strpos($info,"@'")!==false) //Parse user @'john doe'
             {
                  $info_tab=explode("@'",$info);
                  $info="";
