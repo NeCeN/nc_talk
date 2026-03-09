@@ -57,9 +57,9 @@ def read_socket():
 				tps={}
 			talk[message['eq_id']]=message['talk_id']
 			tps[message['eq_id']]=0
-			logging.debug("talk " + talk[message['eq_id']] + " added to " + message['eq_id'])
-		except e:
-			logging.error('Send command to demon error : '+str(e))
+			logging.debug("talk {talk[message['eq_id']]} added to {message['eq_id']}")
+		except os.name:
+			logging.error('Send command to demon error.')
 
 def listen():
 	global JEEDOM_COM

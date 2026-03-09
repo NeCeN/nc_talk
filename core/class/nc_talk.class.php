@@ -21,6 +21,7 @@ require_once __DIR__  . '/../../../../core/php/core.inc.php';
 
 
 class nc_talk extends eqLogic {
+private const PYTHON_PATH = __DIR__ . '/../../resources/venv/bin/python3';
     /*     * *************************Attributs****************************** */
 
   /*
@@ -183,7 +184,7 @@ class nc_talk extends eqLogic {
      */
 
     /*     * **********************Getteur Setteur*************************** */
-    public function deamon_update() {
+    public static function deamon_update() {
         $deamon_info = self::deamon_info();
         if ($deamon_info['state'] != 'ok') {
             throw new Exception("Le démon n'est pas démarré");
@@ -208,6 +209,7 @@ class nc_talk extends eqLogic {
     }
 
     public static function deamon_info() {
+
         $return = array();
         $return['log'] = __CLASS__;
         $return['state'] = 'nok';
@@ -242,10 +244,12 @@ class nc_talk extends eqLogic {
         if ($deamon_info['launchable'] != 'ok') {
             throw new Exception(__('Veuillez vérifier la configuration', __FILE__));
         }
-
+        //$parent_path = realpath(dirname(__FILE__) . '/../..'); // répertoire parent du démon
+        //$cmd = 'cd ' . escapeshellarg($parent_path) . ' && ' . self::PYTHON_PATH . ' -m resources.JeedomConnectd.JeedomConnectd'; // nom du démon à modifier
         $path = realpath(dirname(__FILE__) . '/../../resources/nc_talkd'); // répertoire du démon à modifier
-        $cmd = 'python3 ' . $path . '/nc_talkd.py'; // nom du démon à modifier
-        $cmd .= ' --loglevel ' . log::convertLogLevel(log::getLogLevel(__CLASS__));
+        $cmd = self::PYTHON_PATH . " {$path}/nc_talkd.py"; // nom du démon à modifier
+ 
+       $cmd .= ' --loglevel ' . log::convertLogLevel(log::getLogLevel(__CLASS__));
         $cmd .= ' --socketport ' . config::byKey('socketport', __CLASS__, '52029'); // port par défaut à modifier
         $cmd .= ' --callback ' . network::getNetworkAccess('internal', 'proto:127.0.0.1:port:comp') . '/plugins/nc_talk/core/php/jeenc_talk.php'; // chemin de la callback url à modifier (voir ci-dessous)
         $cmd .= ' --user "' . trim(str_replace('"', '\"', config::byKey('nc_user', __CLASS__))) . '"'; // on rajoute les paramètres utiles à votre démon, ici user
@@ -287,25 +291,55 @@ class nc_talk extends eqLogic {
 
     public static function dependancy_install() {
         log::remove(__CLASS__ . '_update');
-        return array('script' => dirname(__FILE__) . '/../../resources/install.sh ' . jeedom::getTmpFolder(__CLASS__) . '/dependency', 'log' => log::getPathToLog(__CLASS__ . '_update'));
+        return array('script' => dirname(__FILE__) . '/../../resources/install_apt.sh ' . jeedom::getTmpFolder(__CLASS__) . '/dependence', 'log' => log::getPathToLog(__CLASS__ . '_update'));
     }
-    public static function dependancy_info() {
-        $return = array();
-        $return['log'] = log::getPathToLog(__CLASS__ . '_update');
-        $return['progress_file'] = jeedom::getTmpFolder(__CLASS__) . '/dependency';
-        if (file_exists(jeedom::getTmpFolder(__CLASS__) . '/dependency')) {
-            $return['state'] = 'in_progress';
-        } else {
-            if (exec(system::getCmdSudo() . system::get('cmd_check') . '-Ec "python3\-requests|python3\-voluptuous|python3\-bs4"') < 3) { // adaptez la liste des paquets et le total
-                $return['state'] = 'nok';
-            } elseif (exec(system::getCmdSudo() . 'pip3 list | grep -Ewc "aiohttp"') < 1) { // adaptez la liste des paquets et le total
-                $return['state'] = 'nok';
-            } else {
+
+        public static function dependancy_info() {
+                $return = array();
+                $return['log'] = log::getPathToLog(__CLASS__ . '_dependance');
+                $return['progress_file'] = jeedom::getTmpFolder(__CLASS__) . '/dependance';
                 $return['state'] = 'ok';
-            }
+                if (file_exists(jeedom::getTmpFolder(__CLASS__) . '/dependance')) {
+                        $return['state'] = 'in_progress';
+                } elseif (!self::pythonRequirementsInstalled(self::PYTHON_PATH, __DIR__ . '/../../resources/requirements.txt')) {
+                        $return['state'] = 'nok';
+                }
+                return $return;
         }
-        return $return;
-    }
+
+        /**
+         * copyrigth : Mips2648
+         *
+         * @param string $pythonPath
+         * @param string $requirementsPath
+         * @return void
+         */
+        private static function pythonRequirementsInstalled(string $pythonPath, string $requirementsPath) {
+                if (!file_exists($pythonPath) || !file_exists($requirementsPath)) {
+                        return false;
+                }
+                exec("{$pythonPath} -m pip freeze", $packages_installed);
+                $packages = join("||", $packages_installed);
+                exec("cat {$requirementsPath}", $packages_needed);
+                foreach ($packages_needed as $line) {
+                        if (preg_match('/([^\s]+)[\s]*([>=~]=)[\s]*([\d+\.?]+)$/', $line, $need) === 1) {
+                                if (preg_match('/' . $need[1] . '==([\d+\.?]+)/', $packages, $install) === 1) {
+                                        if ($need[2] == '==' && $need[3] != $install[1]) {
+                                                return false;
+                                        } elseif (version_compare($need[3], $install[1], '>')) {
+                                                return false;
+                                        }
+                                } else {
+                                        return false;
+                                }
+                        }
+                }
+                return true;
+        }
+
+
+
+
 }
 
 class nc_talkCmd extends cmd {
